@@ -96,4 +96,11 @@ public class CalendarEventsStepDefinitions {
         Assert.assertTrue(Driver.getDriver().getTitle().contains("All - Calendar Events - Activities"));
     }
 
+    @Then("Verify that difference between end and start time is exactly {int} hour")
+    public void verify_that_difference_between_end_and_start_time_is_exactly_hour(Integer int1) {
+        CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
+        System.out.println("start"+calendarEventsPage.starts.getText());
+        System.out.println("end"+calendarEventsPage.end.getText());
+    }
+
 }

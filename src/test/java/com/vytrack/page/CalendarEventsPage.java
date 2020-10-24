@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.logging.XMLFormatter;
+
 public class CalendarEventsPage extends BasePage {
 
     @FindBy(id = "prependedInput")
@@ -75,6 +77,21 @@ public class CalendarEventsPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='pull-left btn-group icons-holder']")
     private WebElement cancel;
+
+    @FindBy(xpath = "//input[starts-with(@id,'time_selector_oro_calendar_event_form_start')]")
+    public WebElement starts;
+
+    @FindBy(xpath = "//input[starts-with(@id,'time_selector_oro_calendar_event_form_end')]")
+    public WebElement end;
+
+    /////////////////////////////AC5//////////////////////////////
+
+    /////////////////////////////AC6/////////////////////////////////
+
+    //////////////////////////////AC7//////////////////////////////////////
+
+    @FindBy(xpath = "" )
+    private WebElement allDayCheckBox;
 
 
     /**
