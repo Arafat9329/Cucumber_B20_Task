@@ -20,7 +20,7 @@ public class Hooks {
 
     @After
     public void tearDown(){
-        //Driver.closeDriver();
+        Driver.closeDriver();
         System.out.println("(*___*)End of test execution(*___*)");
     }
 }

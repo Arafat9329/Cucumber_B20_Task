@@ -3,12 +3,12 @@ package com.vytrack.page;
 import com.vytrack.utils.Browser;
 import com.vytrack.utils.ConfigurationReader;
 import com.vytrack.utils.Driver;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
-import java.util.logging.XMLFormatter;
 
 public class CalendarEventsPage extends BasePage {
 
@@ -88,10 +88,37 @@ public class CalendarEventsPage extends BasePage {
 
     /////////////////////////////AC6/////////////////////////////////
 
-    //////////////////////////////AC7//////////////////////////////////////
+    @FindBy(xpath = "//input[starts-with(@id,'oro_calendar_event_form_allDay')]" )
+    public WebElement allDayCheckBox;
 
-    @FindBy(xpath = "" )
-    private WebElement allDayCheckBox;
+    @FindBy(xpath = "//input[starts-with(@id,'recurrence-repeat')]")
+    public WebElement repeatCheckBox;
+
+    @FindBy(xpath = "//select[starts-with(@id,'recurrence-repeat')]")
+    public WebElement repeatsSelector;
+
+    @FindBy(xpath = "//div[@class='controls recurrence-subview-control__items']//label[@class='fields-row']/input[@type='radio']")
+    public WebElement repeatEveryRadioButton;
+
+    @FindBy(xpath = "//input[@type='radio']/following-sibling::span[.='Never']")
+    public WebElement end_neverRadioButton;
+
+    @FindBy(xpath = "//div[@class='control-group recurrence-summary alert-info']")
+    public WebElement summaryMessage;
+
+    @FindBy(xpath = "//span[.='After']/following-sibling::input")
+    private WebElement end_afterEnter;
+
+    @FindBy (xpath = "//span[.='After']/preceding-sibling::input")
+    private WebElement end_afterRadioButton;
+
+    @FindBy(xpath = "//input[@value='monday']")
+    public WebElement repeatOn_monday;
+
+    @FindBy(xpath = "//input[@value='friday']")
+    public WebElement repeatOn_friday;
+
+
 
 
     /**
@@ -138,4 +165,18 @@ public class CalendarEventsPage extends BasePage {
     public void click_cancel(){
         cancel.click();
     }
+
+    public void end_afterEnter(int day){
+        end_afterRadioButton.click();
+        Browser.wait(1);
+        String enter = day+"";
+        end_afterEnter.sendKeys(enter, Keys.ENTER);
+    }
+
+    public void repeatsSelector_select(String type){
+        Select select = new Select(repeatsSelector);
+        repeatsSelector.click();
+        select.selectByVisibleText(type);
+    }
+
 }

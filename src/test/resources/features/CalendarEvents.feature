@@ -29,12 +29,12 @@ Feature: Calendar Events
        And Click on “Cancel” button
       Then Verify that “All Calendar Events” page subtitle is displayed
 
-  @TC5
+  @TC5 @later
     Scenario: Verify that difference between end and start time is exactly 1 hour
        And Click on “Create Calendar Event” button
       Then Verify that difference between end and start time is exactly 1 hour
 
-  @TC6
+  @TC6 @later
     Scenario: Verify that end time is equals to “10:00 PM”
       And Click on “Create Calendar Event” button
       And Select “9:00 PM” as a start time
@@ -71,7 +71,7 @@ Feature: Calendar Events
        And Select “After 10 occurrences” as an “Ends” option.
       Then Verify that following message as a summary is displayed: “Summary: Daily every 1 day, endafter 10 occurrences”
 
-  @TC11
+  @TC11 @later
     Scenario: Verify that following message as a summary is displayed: “Summary: Daily every 1 day, end by Nov 18, 2021”
        And Click on “Create Calendar Event” button
        And Select “Repeat” checkbox
@@ -82,7 +82,7 @@ Feature: Calendar Events
     Scenario: Verify that following message as a summary is displayed: “Summary: Weekly every 1 week onMonday, Friday”
        And Click on “Create Calendar Event” button
        And Select “Repeat” checkbox
-       And Select “Weekly” options as a “Repeat” option
+       And Select "Weekly" options as a “Repeat” option
        And Select “Monday and Friday” options as a “Repeat On” options
       Then Verify that “Monday and Friday” options are selected
       Then Verify that following message as a summary is displayed: “Summary: Weekly every 1 week onMonday, Friday”
