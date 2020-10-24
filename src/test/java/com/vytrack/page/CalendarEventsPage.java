@@ -119,8 +119,6 @@ public class CalendarEventsPage extends BasePage {
     public WebElement repeatOn_friday;
 
 
-
-
     /**
      *
      * @param role: store manager,

@@ -6,12 +6,12 @@ Feature: Calendar Events
       And user naivest to "Activities" and "Calendar Events"
 
 
-  @TC1
+  @TC1 @objectTest
     Scenario: Verify that “view”, “edit” and “delete” options are available
        And Hover on three dots “...” for “Testers meeting” calendar event
       Then Verify that “view”, “edit” and “delete” options are available
 
-  @TC2
+  @TC2 @objectTest
     Scenario: Verify that “Title” column still displayed
        And Click on “Grid Options” button
        And Deselect all options except “Title”
