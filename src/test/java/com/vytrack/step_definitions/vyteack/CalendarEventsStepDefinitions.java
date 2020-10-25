@@ -16,7 +16,7 @@ public class CalendarEventsStepDefinitions {
 
     @Given("user in login page")
     public void user_in_login_page() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        Driver.getDriver().get(ConfigurationReader.getProperty("vyTrackurl"));
     }
 
     @When("user login as {string}")
@@ -90,15 +90,8 @@ public class CalendarEventsStepDefinitions {
     @Then("Verify that difference between end and start time is exactly 1 hour")
     public void verify_that_difference_between_end_and_start_time_is_exactly_hour() {
         Browser.wait(1);
-        //calendarEventsPage.startsTimeInput.click();
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
-        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.clear();
+
         calendarEventsPage.startsTimeInput.sendKeys("10"+Keys.ENTER);
 
         Browser.wait(2);
