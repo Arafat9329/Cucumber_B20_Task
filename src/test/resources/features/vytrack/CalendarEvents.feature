@@ -1,3 +1,4 @@
+@TC
 Feature: Calendar Events
 
   Background:common steps
@@ -6,12 +7,12 @@ Feature: Calendar Events
       And user naivest to "Activities" and "Calendar Events"
 
 
-  @TC1 @objectTest
+  @TC1
     Scenario: Verify that “view”, “edit” and “delete” options are available
        And Hover on three dots “...” for “Testers meeting” calendar event
       Then Verify that “view”, “edit” and “delete” options are available
 
-  @TC2 @objectTest
+  @TC2
     Scenario: Verify that “Title” column still displayed
        And Click on “Grid Options” button
        And Deselect all options except “Title”
@@ -29,12 +30,12 @@ Feature: Calendar Events
        And Click on “Cancel” button
       Then Verify that “All Calendar Events” page subtitle is displayed
 
-  @TC5 @later
+  @TC5
     Scenario: Verify that difference between end and start time is exactly 1 hour
        And Click on “Create Calendar Event” button
       Then Verify that difference between end and start time is exactly 1 hour
 
-  @TC6 @later
+  @TC6
     Scenario: Verify that end time is equals to “10:00 PM”
       And Click on “Create Calendar Event” button
       And Select “9:00 PM” as a start time
@@ -71,12 +72,12 @@ Feature: Calendar Events
        And Select “After 10 occurrences” as an “Ends” option.
       Then Verify that following message as a summary is displayed: “Summary: Daily every 1 day, endafter 10 occurrences”
 
-  @TC11 @later
+  @TC11
     Scenario: Verify that following message as a summary is displayed: “Summary: Daily every 1 day, end by Nov 18, 2021”
        And Click on “Create Calendar Event” button
        And Select “Repeat” checkbox
-       And Select “By Nov 18, 2021” as an “Ends” option.
-      Then Verify that following message as a summary is displayed: “Summary: Daily every 1 day, end by Nov 18, 2021”
+       And Select “By "Nov" 18, 2021” as an “Ends” option.
+      Then Verify that following message as a summary is displayed: “Summary: Daily every 1 day, end by "Nov" 18, 2021
 
   @TC12
     Scenario: Verify that following message as a summary is displayed: “Summary: Weekly every 1 week onMonday, Friday”

@@ -1,8 +1,9 @@
-package com.vytrack.page;
+package com.vytrack.page.vytrack;
 
 import com.vytrack.utils.Browser;
 import com.vytrack.utils.ConfigurationReader;
 import com.vytrack.utils.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -79,14 +80,16 @@ public class CalendarEventsPage extends BasePage {
     private WebElement cancel;
 
     @FindBy(xpath = "//input[starts-with(@id,'time_selector_oro_calendar_event_form_start')]")
-    public WebElement starts;
+    public WebElement startsTimeInput;
 
     @FindBy(xpath = "//input[starts-with(@id,'time_selector_oro_calendar_event_form_end')]")
-    public WebElement end;
+    public WebElement endTimeInput;
 
-    /////////////////////////////AC5//////////////////////////////
+    @FindBy(xpath = "//div[@id='oro-dropdown-mask']/following-sibling::div[1]//li[.='1:00 AM']")
+    public WebElement startsTimeSelector;
 
-    /////////////////////////////AC6/////////////////////////////////
+    @FindBy(xpath = "//div[@id='oro-dropdown-mask']/following-sibling::div[1]//li[.='11:00 AM']")
+    public WebElement endTimeSelector11AM;
 
     @FindBy(xpath = "//input[starts-with(@id,'oro_calendar_event_form_allDay')]" )
     public WebElement allDayCheckBox;
@@ -112,12 +115,26 @@ public class CalendarEventsPage extends BasePage {
     @FindBy (xpath = "//span[.='After']/preceding-sibling::input")
     private WebElement end_afterRadioButton;
 
+    @FindBy (xpath = "//span[.='By']/preceding-sibling::input")
+    public WebElement end_byRadioButton;
+
+    @FindBy(xpath = "//input[@class='datepicker-input hasDatepicker']")
+    public WebElement end_by_dateEnter;
+
+    @FindBy(xpath = "//select[@class='ui-datepicker-month']")
+    public WebElement end_by_dateEnter_monthsSelector;
+
+    @FindBy(xpath = "//select[@class='ui-datepicker-year']")
+    public WebElement end_by_dateEnter_yearSelector;
+
+    @FindBy(xpath = "//table[@class='ui-datepicker-calendar']//span[.='1']")
+    public WebElement end_by_dateEnter_datePikerDay1;
+
     @FindBy(xpath = "//input[@value='monday']")
     public WebElement repeatOn_monday;
 
     @FindBy(xpath = "//input[@value='friday']")
     public WebElement repeatOn_friday;
-
 
     /**
      *
@@ -175,6 +192,28 @@ public class CalendarEventsPage extends BasePage {
         Select select = new Select(repeatsSelector);
         repeatsSelector.click();
         select.selectByVisibleText(type);
+    }
+
+    public WebElement endTimeSelector11AMorEnter(String timeAmOnly){
+        return  Driver.getDriver().findElement(By.xpath("//div[@id='oro-dropdown-mask']/following-sibling::div[1]//li[.='"+timeAmOnly+":00 AM']"));
+    }
+
+    /**
+     * month:MUST BE Current or futureMonths
+     * @param month:Oct, Nov, Dec ......
+     * @param year:2020, 2021, 2022....
+     * @param day: 1,2,3,4,5,6
+     */
+    public void pickDate(String month, Integer day, Integer year){
+        Select selectMonth = new Select(end_by_dateEnter_monthsSelector);
+        Select selectYear = new Select(end_by_dateEnter_yearSelector);
+        selectMonth.selectByVisibleText(month);
+        Browser.wait(1);
+        selectYear.selectByVisibleText((year+""));
+        Browser.wait(1);
+
+        Driver.getDriver().findElement(By.xpath("//table[@class='ui-datepicker-calendar']//a[.='"+(day+"")+"']")).click();
+
     }
 
 }

@@ -1,6 +1,6 @@
-package com.vytrack.step_definitions;
+package com.vytrack.step_definitions.vyteack;
 
-import com.vytrack.page.CalendarEventsPage;
+import com.vytrack.page.vytrack.CalendarEventsPage;
 import com.vytrack.utils.Browser;
 import com.vytrack.utils.ConfigurationReader;
 import com.vytrack.utils.Driver;
@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
 public class CalendarEventsStepDefinitions {
@@ -86,19 +87,53 @@ public class CalendarEventsStepDefinitions {
         Assert.assertTrue(Driver.getDriver().getTitle().contains("All - Calendar Events - Activities"));
     }
 
-    //////////////////////////////AC5///////////////////////////////////////////////
-//    @Then("Verify that difference between end and start time is exactly {int} hour")
-//    public void verify_that_difference_between_end_and_start_time_is_exactly_hour(Integer int1) {
-//        CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
-//        System.out.println("start"+calendarEventsPage.starts.getText());
-//        System.out.println("end"+calendarEventsPage.end.getText());
-//    }
-    //////////////////////////////AC6////////////////////////////////////////////////////
+    @Then("Verify that difference between end and start time is exactly 1 hour")
+    public void verify_that_difference_between_end_and_start_time_is_exactly_hour() {
+        Browser.wait(1);
+        //calendarEventsPage.startsTimeInput.click();
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys("10"+Keys.ENTER);
 
-    ///////////////////////////////AC7//////////////////////////////////////////////////
+        Browser.wait(2);
+        calendarEventsPage.endTimeInput.click();
+        Browser.wait(2);
+        Assert.assertTrue(calendarEventsPage.endTimeSelector11AM.isEnabled());
+
+    }
+
+    @When("Select “9:00 PM” as a start time")
+    public void select_pm_as_a_start_time() {
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys(Keys.BACK_SPACE);
+        calendarEventsPage.startsTimeInput.sendKeys("9"+Keys.ENTER);
+    }
+
+    @Then("Verify that end time is equals to “10:00 PM”")
+    public void verify_that_end_time_is_equals_to_pm() {
+        Browser.wait(1);
+        calendarEventsPage.endTimeInput.click();
+        Browser.wait(2);
+        Assert.assertTrue(calendarEventsPage.endTimeSelector11AMorEnter("10").isEnabled());
+    }
 
     @When("Select “All-Day Event” checkbox")
     public void select_all_day_event_checkbox() {
+        Browser.wait(1);
        calendarEventsPage.allDayCheckBox.click();
     }
 
@@ -110,13 +145,13 @@ public class CalendarEventsStepDefinitions {
     @Then("Verify that start and end time input boxes are not displayed")
     public void verify_that_start_and_end_time_input_boxes_are_not_displayed() {
         Browser.wait(2);
-        Assert.assertTrue(!calendarEventsPage.starts.isDisplayed());
+        Assert.assertFalse(calendarEventsPage.startsTimeInput.isDisplayed());
     }
 
     @Then("Verify that start and end date input boxes are displayed")
     public void verify_that_start_and_end_date_input_boxes_are_displayed() {
         Browser.wait(2);
-        Assert.assertTrue(!calendarEventsPage.end.isDisplayed());
+        Assert.assertFalse(calendarEventsPage.endTimeInput.isDisplayed());
     }
 
     @When("Select “Repeat” checkbox")
@@ -196,4 +231,21 @@ public class CalendarEventsStepDefinitions {
         Assert.assertEquals(accRes,"Summary:\n" +
                 "Weekly every "+int1+" week on Monday, Friday");
     }
+
+    @When("Select “By {string} {int}, {int}” as an “Ends” option.")
+    public void select_by_nov_as_an_ends_option(String str, Integer day, Integer year) {
+        calendarEventsPage.end_byRadioButton.click();
+        calendarEventsPage.end_by_dateEnter.click();
+        calendarEventsPage.pickDate(str,day,year);
+
+
+    }
+
+    @Then("Verify that following message as a summary is displayed: “Summary: Daily every 1 day, end by {string} {int}, {int}")
+    public void verify_that_following_message_as_a_summary_is_displayed_summary_daily_every_day_end_by_nov(String str, Integer int2, Integer int3) {
+        Assert.assertEquals(calendarEventsPage.summaryMessage.getText(),"Summary:\n" +
+                "Daily every 1 day, end by "+str+" "+int2+", "+int3+"");
+
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.vytrack.page;
+package com.vytrack.page.vytrack;
 
 import com.vytrack.utils.Browser;
 import com.vytrack.utils.Driver;
@@ -24,7 +24,7 @@ public abstract class BasePage {
         Browser.wait(2);
         WebElement moduleElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(moduleXpath)));
         wait.until(ExpectedConditions.elementToBeClickable(moduleElement)).click();
-        Browser.wait(2);
+        Browser.wait(1);
     }
 
 }
