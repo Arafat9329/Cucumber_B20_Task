@@ -3,8 +3,8 @@ package com.vytrack.page.vytrack;
 public class Test1 {
 
     public static void main(String[] args) {
-        System.out.println("Hello Halifax");
-        System.out.println("Salam balilar");
+        System.out.println("Hello Atlantic Canada 3.0");
+        System.out.println("Salam balilar 3.0");
 
 
     }
